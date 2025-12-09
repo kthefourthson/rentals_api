@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 resources :users 
 resources :products 
+# post "login" => ""
 
 end

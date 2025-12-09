@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show 
     user = User.find( 
-      params[:id] 
+      params[:id]  
     )
     render json: user 
   end 
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     if user.save 
       render json: user 
     else 
-      render json: {errors: user.errors.full_messages}, status: :unproccessable_entity 
+      render json: {errors: user.errors.full_messages}, status: :unprocessable_entity 
     end
   end 
   def update 
@@ -38,14 +38,14 @@ class UsersController < ApplicationController
     )
       render json: user 
     else 
-      render json: {errors: user.errors.full_messages}, status: :unproccessable_entity
+      render json: {errors: user.errors.full_messages}, status: :unprocessable_entity
 
     end
   end
   def destroy 
     user = User.find( params[:id])
     user.destroy 
-      render json: {message; "user deleted"},
+      render json: {message: "user deleted"},
       status: :ok 
   end
 end

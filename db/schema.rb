@@ -10,13 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_13_061132) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_01_083102) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "category"
-    t.string "rental_price"
+    t.decimal "rental_price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "available", default: true
+  end
+
+  create_table "rentals", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "rented_at"
+    t.datetime "returned_at"
+    t.string "status", default: "active"
+    t.decimal "total_price", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_rentals_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_rentals_on_user_id_and_product_id"
+    t.index ["user_id"], name: "index_rentals_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -27,4 +42,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_13_061132) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "rentals", "products"
+  add_foreign_key "rentals", "users"
 end

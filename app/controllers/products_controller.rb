@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index 
-    products = Products.all
+    products = Product.all
       render json: products
   end
   def show 
@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
     def destroy 
       product = Product.find( params[:id])
       product.destroy 
-        render json: {message; "product deleted"},
+        render json: {message: "product deleted"},
         status: :ok 
     end
 end
