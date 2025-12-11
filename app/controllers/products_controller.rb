@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authorize_request, except: [:index, :show]
   def index 
     products = Product.all
       render json: products
@@ -9,6 +10,7 @@ class ProductsController < ApplicationController
     )
     render json: product
   end 
+  
   def create
     product = Product.new( 
       name: params[:name],

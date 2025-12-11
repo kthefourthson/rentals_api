@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  validates :email, presence: true, uniqueness: true
+end
 #   create_table "users", force: :cascade do |t|
 #     t.string "name"
 #     t.string "email"
@@ -22,5 +24,4 @@ class User < ApplicationRecord
 
 
 
-end
 

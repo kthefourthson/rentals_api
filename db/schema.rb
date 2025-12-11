@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_01_083102) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_10_081338) do
+  create_table "product_rentals", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.decimal "total_price"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_rentals_on_car_id"
+    t.index ["user_id"], name: "index_product_rentals_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "category"
@@ -43,6 +56,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_083102) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "product_rentals", "cars"
+  add_foreign_key "product_rentals", "users"
   add_foreign_key "rentals", "products"
   add_foreign_key "rentals", "users"
 end

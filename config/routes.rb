@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   # root "posts#index"
 resources :users 
 resources :products 
-# post "login" => ""
+resources :rentals
 
+post '/signup', to: 'users#create'
+post '/login', to: 'sessions#create' 
 end
